@@ -3,14 +3,22 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 from pathlib import Path
 
 
-ROOT = Path(__file__).with_name("typecast-sdk-quality-test-jinhee-eunsol-20-words")
+ROOT = Path(
+    os.environ.get(
+        "TYPECAST_RECUT_INPUT_DIR",
+        Path(__file__).with_name("typecast-sdk-quality-test-jinhee-eunsol-20-words-v2"),
+    )
+)
 FULL_DIR = ROOT / "full"
-OUTPUT_DIR = ROOT / "word-only-no-preroll"
+OUTPUT_DIR = Path(
+    os.environ.get("TYPECAST_RECUT_OUTPUT_DIR", ROOT / "word-only-recut")
+)
 
 
 def main() -> None:
